@@ -1,1 +1,1 @@
-sadf -dh -- -S>stats.data
+sadf -dh -- -S>stats.swap.dat

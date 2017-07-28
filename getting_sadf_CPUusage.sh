@@ -1,1 +1,1 @@
- sadf -d > stats.dat
+ sadf -dh > stats.cpu.dat

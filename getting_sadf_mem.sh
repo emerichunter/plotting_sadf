@@ -1,2 +1,2 @@
-sadf -dh -- -r >stats.data
+sadf -dh -- -r >stats.mem.dat
 

@@ -1,1 +1,1 @@
-sadf -dh -- -q>stats.data
+sadf -dh -- -q>stats.q.dat
