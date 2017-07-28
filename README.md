@@ -23,3 +23,10 @@ Most notable scripts are :
 There are also less noteworthy scripts :
  * getting_sadf_CPUpages.sh 	 Pages from CPU statistics
  * getting_sadf_IOtransfert.sh Transfert to disk
+
+
+TODO :
+ * plotting of CPUpages
+ * plotting of IOtransfert
+ * wrap it all up
+ * import and plot in PG
