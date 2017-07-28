@@ -12,7 +12,7 @@ NOTE : postgres can consult any info from sar
 2. execute plotstats
 ` gnuplot plotstats.cpu.plot`
 
-3. take a look at the graph for the day in sar.png
+3. take a look at the graph for the day in sar.cpu.png
 
 
 Most notable scripts are :
