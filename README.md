@@ -4,8 +4,8 @@ plotting sadf info with gnuplo
 ===========================
 
 
-1. execute getting_sadf.sh
-`./getting_sadf.sh`
+1. execute getting_sadf_CPUusage.sh
+`./getting_sadf_CPUusage.sh`
 
 
 2. execute plotstats
