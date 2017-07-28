@@ -1,0 +1,1 @@
+ sadf -d > stats.dat
