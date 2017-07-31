@@ -14,8 +14,17 @@ NOTE : postgres can consult any info from sar
 
 3. take a look at the graph for the day in sar.cpu.png
 
+Instantaneous graphing (output to png and printing to screen in dumb) :
+ * `./graph.cpu.sh`
+ * `./graph.swap.sh`
+ * `./graph.queue.sh`
+ * `./graph.mem.sh`
+ * `./graph.pages.sh`
+ * `./graph.io.sh`
+ 
 
 Most notable scripts are :
+ * getting_sadf_CPUusage.sh statistics from CPU (%user/%nice/%system/%iowait)
  * getting_sadf_mem.sh 	  statistics from RAM
  * getting_sadf_queue.sh 	statistics from run-q
  * getting_sadf_swap.sh   statistics from swap 
@@ -25,8 +34,6 @@ There are also less noteworthy scripts :
  * getting_sadf_IOtransfert.sh Transfert to disk
 
 
-TODO :
- * plotting of CPUpages
- * plotting of IOtransfert
- * wrap it all up
- * import and plot in PG
+_TODO_ :
+ * wrap it all up in full report
+ * import and plot in PG (if relevant)
