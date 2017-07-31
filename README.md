@@ -4,17 +4,9 @@ NOTE : postgres can consult any info from sar
 
 ===========================
 
+Prerequisite : GNUplot
 
-1. execute getting_sadf_CPUusage.sh
-`./getting_sadf_CPUusage.sh`
-
-
-2. execute plotstats
-` gnuplot plotstats.cpu.plot`
-
-3. take a look at the graph for the day in sar.cpu.png
-
-Instantaneous graphing (output to png and printing to screen in dumb) :
+Instantaneous graphing (output to png and printing to screen in dumb directly) :
  * `./graph.cpu.sh`
  * `./graph.swap.sh`
  * `./graph.queue.sh`
@@ -22,6 +14,20 @@ Instantaneous graphing (output to png and printing to screen in dumb) :
  * `./graph.pages.sh`
  * `./graph.io.sh`
  
+Statistics from sadf : sar from the last 24h
+
+What it does
+
+1. execute getting_sadf_CPUusage.sh puts the sar stats in CSV file format
+`./getting_sadf_CPUusage.sh`
+
+
+2. execute plotstats to plot in png
+` gnuplot plotstats.cpu.plot`
+
+3. take a look at the graph for the day in sar.cpu.png 
+
+
 
 Most notable scripts are :
  * getting_sadf_CPUusage.sh statistics from CPU (%user/%nice/%system/%iowait)
