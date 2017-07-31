@@ -34,6 +34,12 @@ There are also less noteworthy scripts :
  * getting_sadf_IOtransfert.sh Transfert to disk
 
 
-_TODO_ :
+**TODO** :
  * wrap it all up in full report
  * import and plot in PG (if relevant)
+ 
+ ![Example of cpu graph in png](https://github.com/emerichunter/plotting_sadf/blob/master/sar.cpu.png)
+ 
+  ![Example of cpu graph in dumb terminal](https://github.com/emerichunter/plotting_sadf/blob/master/sar_cpu_dumb.PNG)
+
+ 
