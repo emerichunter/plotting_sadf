@@ -1,1 +1,1 @@
- sadf -dh -- -b>stats.dat
+ sadf -dh -- -b>stats.io.dat
