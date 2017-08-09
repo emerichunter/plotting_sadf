@@ -5,3 +5,4 @@
 gnuplot plotstats.mem.plot
 
 gnuplot dumbgraph.mem.plot
+gnuplot dumbgraph.mem_kb.plot
