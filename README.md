@@ -1,6 +1,7 @@
 # plotting_sadf
 plotting sadf info with gnuplot 
-NOTE : postgres can consult any info from sar
+
+NOTE : the UNIX user `postgres` can consult any info from sar
 
 ===========================
 
