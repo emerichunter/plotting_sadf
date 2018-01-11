@@ -38,14 +38,14 @@ What it does
 
 
 Most notable scripts are :
- * getting_sadf_CPUusage.sh statistics from CPU (%user/%nice/%system/%iowait)
- * getting_sadf_mem.sh 	  statistics from RAM
- * getting_sadf_queue.sh 	statistics from run-q
- * getting_sadf_swap.sh   statistics from swap 
+ * `getting_sadf_CPUusage.sh` statistics from CPU (%user/%nice/%system/%iowait)
+ * `getting_sadf_mem.sh` 	  statistics from RAM
+ * `getting_sadf_queue.sh` 	statistics from run-q
+ * `getting_sadf_swap.sh`   statistics from swap 
   
 There are also less noteworthy scripts :
- * getting_sadf_CPUpages.sh 	 Pages from CPU statistics
- * getting_sadf_IOtransfert.sh Transfert to disk
+ * `getting_sadf_CPUpages.sh` 	 Pages from CPU statistics
+ * `getting_sadf_IOtransfert.sh` Transfert to disk
 
 
 **TODO** :
