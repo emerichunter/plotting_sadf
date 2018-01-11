@@ -4,7 +4,7 @@ NOTE : postgres can consult any info from sar
 
 ===========================
 
-Prerequisite : GNUplot
+Prerequisite : GNUplot and sysstat 
 
 Instantaneous graphing (output to png and printing to screen in dumb directly) :
  * `./graph.cpu.sh`
@@ -46,6 +46,6 @@ There are also less noteworthy scripts :
  
  ![Example of cpu graph in png](https://github.com/emerichunter/plotting_sadf/blob/master/sar.cpu.png)
  
-  ![Example of cpu graph in dumb terminal](https://github.com/emerichunter/plotting_sadf/blob/master/sar_cpu_dumb.PNG)
+ ![Example of cpu graph in dumb terminal](https://github.com/emerichunter/plotting_sadf/blob/master/sar_cpu_dumb.PNG)
 
  
