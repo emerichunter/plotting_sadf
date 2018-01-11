@@ -14,8 +14,14 @@ Instantaneous graphing (output to png and printing to screen in dumb directly) :
  * `./graph.mem.sh`
  * `./graph.pages.sh`
  * `./graph.io.sh`
+
  
 Statistics from sadf : sar from the last 24h
+
+Use in postgres : 
+`\cd to the directory of plotting_sadf`
+`\! ./graph.cpu.sh` to get graph from dumb terminal
+
 
 What it does
 
