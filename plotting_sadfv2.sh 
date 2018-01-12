@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# plotting_sadf a.k.a sar2plot
+
+#TODO :
+# sar instead of sadf if possible
+# option for format or type of terminal (-f), type of data (-t) , size  (-s), duration/date (-d)
+- 
+
+
+
+if [ $# -eq 0 ]
+then
+        echo "Missing options!"
+        echo "(run $0 -h for help)"
+        echo ""
+        exit 0
+fi
+
+ECHO="false"
+
+while getopts "h:t:f:w:l" OPTION; do
+        case $OPTION in
+
+                t)
+                        TYPE="$OPTARG"
+                        ;;
+						
+				f)
+						FORMAT="$OPTARG"
+                        ;;
+
+				w)
+						WIDTH="$OPTARG"
+                        ;;
+
+                l)
+						HEIGHT="$OPTARG"
+                        ;;
+				d)
+						DAY="$OPTARG"
+						;;
+
+                h)
+                        echo "Usage:"
+                        echo "plotting_sadf -h "
+                        echo "plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -h [45] -o ['outputname']"
+                        echo "" 
+                        echo "   -h     help (this output)"
+                        exit 0
+                        ;;
+
+        esac
+done
+
+
+# DAY for the stats
+if [ $DAY -neq 0 ]; then
+  DAY="$DAY"
+else
+  DAY=""
+fi
+
+
+# Type of stats : make something nicer
+if [ $TYPE = "swap" ]
+then
+        echo "swap";
+		sadf -dh -- -S>stats.swap.dat
+elif [ $TYPE = "io" ]
+then
+        echo "io transfert";
+		sadf -dh -- -b>stats.io.dat
+elif [ $TYPE = "q" ]
+then
+        echo "queue";
+		sadf -dh -- -q>stats.q.dat
+elif [ $TYPE = "ram" ]
+then
+        echo "ram";
+	 	sadf -dh -- -r >stats.ram.dat
+elif [ $TYPE = "cpu" ]
+then
+        echo "cpu";
+		sadf -dh > stats.cpu.dat
+else 
+		echo "default is cpu!";
+		sadf -dh > stats.cpu.dat
+		PLOTSTR="plot datafile using 3:5 title "%user" with lines, datafile using 3:6 title "%nice" with lines, datafile using 3:7 title "%system" with lines, datafile using 3:8 title "%iowait" with lines"
+		PLOTDMSTR=""
+fi
+
+# FORMAT - terminal 
+
+if [ $FORMAT = "png" ]
+then
+        echo "png";
+		sadf -dh > stats.cpu.dat
+else 
+		echo "default is cpu!";
+		sadf -dh > stats.cpu.dat
+fi
