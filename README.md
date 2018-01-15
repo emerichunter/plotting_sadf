@@ -32,23 +32,13 @@ plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170]
  
 
 
-Most notable scripts are :
- * `getting_sadf_CPUusage.sh` statistics from CPU (%user/%nice/%system/%iowait)
- * `getting_sadf_mem.sh` 	  statistics from RAM
- * `getting_sadf_queue.sh` 	statistics from run-q
- * `getting_sadf_swap.sh`   statistics from swap 
-  
-There are also less noteworthy scripts :
- * `getting_sadf_CPUpages.sh` 	 Pages from CPU statistics
- * `getting_sadf_IOtransfert.sh` Transfert to disk
-
-
 **TODO** :
  * wrap it all up in full report
  * import and plot in PG (if relevant)
  
  ![Example of cpu graph in png](https://github.com/emerichunter/plotting_sadf/blob/master/sar.cpu.png)
  
+ ![Example of queue with colors ](https://github.com/emerichunter/plotting_sadf/blob/plottingsadfv2/plotting_sadf.PNG)
+ 
  ![Example of cpu graph in dumb terminal](https://github.com/emerichunter/plotting_sadf/blob/master/sar_cpu_dumb.PNG)
 
- 
