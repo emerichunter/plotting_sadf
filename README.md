@@ -26,7 +26,9 @@ plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170]
    -w     width of screen
    -l     height of screen
    -o     output file name
+   -c     get them nice colors!
 ~~~
+
 
 
  
