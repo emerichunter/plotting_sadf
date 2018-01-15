@@ -35,6 +35,7 @@ while getopts "ht:f:w:l:d:co:" OPTION; do
                         echo "   -w     width of screen "
                         echo "   -l     height of screen "
                         echo "   -o     output file name "
+                        echo "   -c     get them nice colors! "
                         exit 0
                         ;;
 
