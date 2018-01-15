@@ -19,15 +19,22 @@ then
 fi
 
 
-while getopts "h:t:f:w:l:d:o" OPTION; do
+while getopts "ht:f:w:l:d:co:" OPTION; do
         case $OPTION in
 
                 h)
                         echo "Usage:"
                         echo "plotting_sadf -h "
-                        echo "plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -h [45] -o ['outputname']"
+                        echo "plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -l [45] -o ['outputname']"
+                        echo "" 
                         echo "" 
                         echo "   -h     help (this output)"
+                        echo "   -t     type (cpu|io|pages|ram|q|swap)"
+                        echo "   -d     day -n to get stats from the last nth day, leave empty for today"
+                        echo "   -f     format dumb or png supported"
+                        echo "   -w     width of screen "
+                        echo "   -l     height of screen "
+                        echo "   -o     output file name "
                         exit 0
                         ;;
 
@@ -50,6 +57,10 @@ while getopts "h:t:f:w:l:d:o" OPTION; do
 		d)
 			DAY="$OPTARG"
 			;;
+
+		c)
+			COLOR=1
+			;;
 						
 		o) 
 			OUTPUT="$OPTARG"
@@ -70,12 +81,11 @@ else
   DAY=""
 fi
 
-echo "$DAY"
-
-echo '$FORMAT'
-echo '$WIDTH'
-echo '$HEIGHT'
-echo '$OUTPUT'
+echo "day : $DAY"
+echo "format : $FORMAT"
+echo "width : $WIDTH"
+echo "height : $HEIGHT"
+echo "output : $OUTPUT"
 
 
 # SADF command
@@ -91,7 +101,8 @@ then
 		TITLE="set title 'SWAP Utilization'"
 		$SADFDAY -- -S>stats.dat
 		PLOTYTICS="set y2tics nomirror autofreq"
-		PLOTYLABEL='set ylabel "% Utilization" \ set y2label "kb Utilization"'
+		PLOTYLABEL='set ylabel "% Utilization"   '
+		PLOTY2LABEL='set y2label "kb Utilization"'
 		PLOTSTR='plot datafile using 3:5  axis x1y2 title "kbswpfree" with lines, datafile using 3:4  axis x1y2 title "kbswpused" with lines, datafile using 3:5 axis x1y1 title "%swpused" with lines, datafile using 3:6  axis x1y2 title "kbswpcad" with lines,  datafile using 3:7 axis x1y1 title "%swpcad" with lines'
 
 elif [ $TYPE = "io" ]
@@ -100,7 +111,8 @@ then
 		TITLE="set title 'I/O transferts Utilization'"
 		$SADFDAY -- -b>stats.dat
 		PLOTYTICS="set y2tics nomirror autofreq"
-		PLOTYLABEL="set ylabel 'IO transferts per second' \ set y2label 'Blocks Utilization'"
+		PLOTYLABEL="set ylabel 'IO transferts per second'" 
+		PLOTY2LABEL=" set y2label 'Blocks Utilization'"
 		PLOTSTR='plot datafile using 3:5 axis x1y1  title "tps" with lines, datafile using 3:4  axis x1y1 title "rtps" with lines, datafile using 3:5 axis x1y1 title "wtps" with lines, datafile using 3:6  axis x1y2 title "bread/s" with lines,  datafile using 3:7 axis x1y2 title "bwrtn/s" with lines'
 
 elif [ $TYPE = "q" ]
@@ -109,7 +121,8 @@ then
 		TITLE="set title 'Queue Utilization'"
 		$SADFDAY -- -q>stats.dat
 		PLOTYTICS="set y2tics nomirror autofreq"
-		PLOTYLABEL="set ylabel 'nb process' \ set y2label '% Utilization'"
+		PLOTYLABEL="set ylabel 'nb process' "
+		PLOTY2LABEL="set y2label '% Utilization'"
 		PLOTSTR='plot datafile using 3:4 axis x1y1 title "runq-sz" with lines, datafile using 3:5 axis x1y1 title "plist-sz" with lines, datafile using 3:6 axis x1y2 title "ldavg-1m%" with lines, datafile using 3:7 axis x1y2 title "ldavg-5m%" with lines, datafile using 3:8 axis x1y2 title "ldavg-15m%" with lines'
 
 elif [ $TYPE = "ram" ]
@@ -118,7 +131,8 @@ then
 		TITLE="set title 'RAM Utilization'"
 	 	$SADFDAY -- -r >stats.dat
 		PLOTYTICS="set y2tics nomirror autofreq"
-		PLOTYLABEL="set ylabel 'kb Utilization' \ set y2label '% Utilization'"
+		PLOTYLABEL="set ylabel 'kb Utilization'"
+		PLOTY2LABEL="set y2label '% Utilization'"
 		PLOTSTR='plot  datafile using 3:4  axis x1y1 title "kbfree" with lines, datafile using 3:5 axis x1y1 title "kbused" with lines,   datafile using 3:7 axis x1y1 title "kbbuff" with lines,  datafile using 3:8 axis x1y1 title "kbcached" with lines, datafile using 3:9 axis x1y1 title "kbcommit" with lines'
 
 elif [ $TYPE = "cpu" ]
@@ -127,6 +141,7 @@ then
 		TITLE="set title 'Processor Utilization'"
 		$SADFDAY > stats.dat
 		PLOTYLABEL="set ylabel '% Utilization'"
+		PLOTY2LABEL=""
 		PLOTSTR='plot datafile using 3:5 title "%user" with lines, datafile using 3:6 title "%nice" with lines, datafile using 3:7 title "%system" with lines, datafile using 3:8 title "%iowait" with lines'
 
 else 
@@ -134,35 +149,30 @@ else
 		TITLE="set title 'Processor Utilization'"
 		$SADFDAY > stats.dat
 		PLOTYLABEL="set ylabel '% Utilization'"
+		PLOTY2LABEL=""
 		PLOTSTR='plot datafile using 3:5 title "%user" with lines, datafile using 3:6 title "%nice" with lines, datafile using 3:7 title "%system" with lines, datafile using 3:8 title "%iowait" with lines'
 
 fi
 
 # DEBUG
-echo "$TITLE"
-echo "$PLOTYTICS"
-echo "$PLOTYLABEL"
-echo "$PLOTSTR"
-echo "$OUTPUT" 
+#echo "$TITLE"
+#echo "$PLOTYTICS"
+#echo "$PLOTYLABEL"
+#echo "$PLOTY2LABEL"
+#echo "$PLOTSTR"
+#echo "$OUTPUT" 
+#echo "$COLOR"
 
 # FORMAT - terminal 
 
 
 
-#if [ $FORMAT = "png" ]
-#then
-#        echo "png";
-#		$SADFDAY > stats.cpu.dat
-#else 
-#		echo "default is cpu!";
-#		$SADFDAY > stats.cpu.dat
-#fi
-
 
 # SIZE
 if [ ! -z "$WIDTH" ] && [ ! -z "$HEIGHT" ]
 then 
-   echo 'OK'
+   echo "width : $WIDTH"
+   echo "height : $HEIGHT"
 elif [ -z "$WIDTH" ] && [ -z "$HEIGHT" ]
 then	
 
@@ -179,7 +189,7 @@ then
    fi
 
 else
-	echo "Please fill both -w AND -h or NONE!"
+	echo "Please fill both -w AND -l or NONE!"
 	exit 1;
 fi
 
@@ -188,7 +198,7 @@ if [ "$FORMAT" = "png" ];
 then
 echo 'datafile="stats.dat" 
 set terminal png medium size '$WIDTH','$HEIGHT' 
-set output '$OUTPUT'
+set output "'$OUTPUT'"
 '$TITLE'
 set xdata time
 set timefmt "%Y-%m-%d %H:%M:%S"
@@ -197,6 +207,7 @@ set key below
 set grid xtics ytics
 set xlabel "Time"
 '$PLOTYLABEL'
+'$PLOTY2LABEL'
 '$PLOTSTR' '> sadf.plot
 
 
@@ -213,17 +224,21 @@ set grid xtics ytics
 set key below
 set xlabel "Time"
 '$PLOTYLABEL'
+'$PLOTY2LABEL'
 '$PLOTSTR' '> sadf.plot
 
 fi
 
-# addition of last line 
-#  echo  "'scaling-$SET.txt' using 1:3 axis x1y1 title '$DESCR' with linespoints $DELIM" >> multi-scale.plot
-#echo "$PLOTSTR" >> sadf.plot 
 
 # Plotting if GNUplot exists
 if [ ! -z $GNUPLOT ] && [ -x $GNUPLOT ]; then
-  gnuplot sadf.plot 2>&1 | grep -v "Warning: empty"
-  #mv clients-sets.png results/
-  #rm sadf.plot
+echo "$COLOR"
+  if [ ! -z "$COLOR" ]
+  then
+	echo "COLOR"
+	gnuplot sadf.plot 2>&1 | GREP_COLOR='01;36' egrep --color=always '\*|$' | GREP_COLOR='01;31' egrep -i --color=always '#|$' | GREP_COLOR='01;32' egrep -i --color=always '%|$' | GREP_COLOR='01;33' egrep -i --color=always '@|$' | GREP_COLOR='01;34' egrep -i --color=always '\$|$'	
+  else
+  	gnuplot sadf.plot 2>&1 | grep -v "Warning: empty"
+  fi
+  rm sadf.plot
 fi
