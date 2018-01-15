@@ -8,33 +8,28 @@ NOTE : the UNIX user `postgres` can consult any info from sar
 Prerequisite : GNUplot and sysstat 
 
 Instantaneous graphing (output to png and printing to screen in dumb directly) :
- * `./graph.cpu.sh`
- * `./graph.swap.sh`
- * `./graph.queue.sh`
- * `./graph.mem.sh`
- * `./graph.pages.sh`
- * `./graph.io.sh`
+ * `./plotting_sadf` for cpu info
+ * `./plotting_sadf -t q   -w 170 -l 45 -c` (see example)
+ * `./graph.queue.sh -t cpu -d -1 -f png -o out.png`
+
+~~~
+./plotting_sadf -h
+Usage:
+plotting_sadf -h
+plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -l [45] -o ['outputname']
+
+
+   -h     help (this output)
+   -t     type (cpu|io|pages|ram|q|swap)
+   -d     day -n to get stats from the last nth day, leave empty for today
+   -f     format dumb or png supported
+   -w     width of screen
+   -l     height of screen
+   -o     output file name
+~~~
+
 
  
-Statistics from sadf : sar from the last 24h
-
-Use in postgres : 
-~~~
-\cd <to/the/directory/of/plotting_sadf
-\! ./graph.cpu.sh 
-~~~
-
-What it does
-
-1. execute getting_sadf_CPUusage.sh puts the sar stats in CSV file format
-`./getting_sadf_CPUusage.sh`
-
-
-2. execute plotstats to plot in png
-` gnuplot plotstats.cpu.plot`
-
-3. take a look at the graph for the day in sar.cpu.png 
-
 
 
 Most notable scripts are :
