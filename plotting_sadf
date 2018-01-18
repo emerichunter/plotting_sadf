@@ -185,8 +185,8 @@ then
    else
 	WIDTH=""
 	HEIGHT=""
-	echo "$WIDTH $EHIGHT"
-   	echo "Dumb terminal is default!"
+	echo "$WIDTH $HEIGHT"
+   	echo "Dumb or X11"
    fi
 
 else
@@ -206,6 +206,24 @@ set timefmt "%Y-%m-%d %H:%M:%S"
 set datafile separator ";"
 set key below
 set grid xtics ytics
+set xlabel "Time"
+'$PLOTYLABEL'
+'$PLOTY2LABEL'
+'$PLOTSTR' '> sadf.plot
+
+elif  [ "$FORMAT" = "x11" ];
+then
+ 
+
+# PLOT in shell dumb
+echo 'datafile="stats.dat" 
+set terminal x11 size '$WIDTH','$HEIGHT' 
+'$TITLE'
+set xdata time
+set timefmt "%Y-%m-%d %H:%M:%S"
+set datafile separator ";"
+set grid xtics ytics
+set key below
 set xlabel "Time"
 '$PLOTYLABEL'
 '$PLOTY2LABEL'
@@ -237,9 +255,9 @@ echo "$COLOR"
   if [ ! -z "$COLOR" ]
   then
 	echo "COLOR"
-	gnuplot sadf.plot 2>&1 | GREP_COLOR='01;36' egrep --color=always '\*|$' | GREP_COLOR='01;31' egrep -i --color=always '#|$' | GREP_COLOR='01;32' egrep -i --color=always '%|$' | GREP_COLOR='01;33' egrep -i --color=always '@|$' | GREP_COLOR='01;34' egrep -i --color=always '\$|$'	
+	gnuplot  sadf.plot 2>&1 | GREP_COLOR='01;36' egrep --color=always '\*|$' | GREP_COLOR='01;31' egrep -i --color=always '#|$' | GREP_COLOR='01;32' egrep -i --color=always '%|$' | GREP_COLOR='01;33' egrep -i --color=always '@|$' | GREP_COLOR='01;34' egrep -i --color=always '\$|$'	
   else
-  	gnuplot sadf.plot 2>&1 | grep -v "Warning: empty"
+  	gnuplot -p sadf.plot 2>&1 | grep -v "Warning: empty"
   fi
   rm sadf.plot
   rm stats.dat
