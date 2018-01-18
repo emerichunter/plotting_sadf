@@ -25,17 +25,17 @@ while getopts "ht:f:w:l:d:co:" OPTION; do
                 h)
                         echo "Usage:"
                         echo "plotting_sadf -h "
-                        echo "plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -l [45] -o ['outputname']"
+                        echo "plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|x11|png] -w [170] -l [45] -o ['outputname']"
                         echo "" 
                         echo "" 
                         echo "   -h     help (this output)"
                         echo "   -t     type (cpu|io|pages|ram|q|swap)"
                         echo "   -d     day -n to get stats from the last nth day, leave empty for today"
-                        echo "   -f     format dumb or png supported"
+                        echo "   -f     format dumb, x11 or png supported"
                         echo "   -w     width of screen "
                         echo "   -l     height of screen "
                         echo "   -o     output file name "
-                        echo "   -c     get them nice colors! "
+                        echo "   -c     get them nice colors for dumb! "
                         exit 0
                         ;;
 
