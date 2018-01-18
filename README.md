@@ -5,18 +5,22 @@ NOTE : the UNIX user `postgres` can consult any info from sar
 
 ===========================
 
-Prerequisite : GNUplot and sysstat 
+Prerequisites : 
+* GNUplot 
+* sysstat 
+* export display (optional)
 
 Instantaneous graphing (output to png and printing to screen in dumb directly) :
  * `./plotting_sadf` for cpu info
  * `./plotting_sadf -t q   -w 170 -l 45 -c` (see example)
  * `./graph.queue.sh -t cpu -d -1 -f png -o out.png`
+ * `./graph.queue.sh -t swap -d -7 -f x11 -w 1900 -l 1080`
 
 ~~~
 ./plotting_sadf -h
 Usage:
 plotting_sadf -h
-plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170] -l [45] -o ['outputname']
+plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|x11|png] -w [170] -l [45] -o ['outputname']
 
 
    -h     help (this output)
@@ -26,7 +30,7 @@ plotting_sadf -t [cpu|io|pages|ram|q|swap] -d [-1|-2|...] -f [dumb|png] -w [170]
    -w     width of screen
    -l     height of screen
    -o     output file name
-   -c     get them nice colors!
+   -c     get them nice colors for dumb!
 ~~~
 
 
