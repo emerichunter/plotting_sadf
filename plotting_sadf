@@ -71,7 +71,7 @@ while getopts "ht:f:w:l:d:co:" OPTION; do
         esac
 done
 
-echo '$TYPE'
+echo "$TYPE"
 
 # DAY for the stats
 if [ -z "$DAY"   ]; then
@@ -96,7 +96,7 @@ echo "$SADFDAY"
 
 
 # Type of stats : make something nicer
-if [ $TYPE = "swap" ]
+if [ "$TYPE" = "swap" ]
 then
         echo "swap";
 		TITLE="set title 'SWAP Utilization'"
@@ -106,7 +106,7 @@ then
 		PLOTY2LABEL='set y2label "kb Utilization"'
 		PLOTSTR='plot datafile using 3:5  axis x1y2 title "kbswpfree" with lines, datafile using 3:4  axis x1y2 title "kbswpused" with lines, datafile using 3:5 axis x1y1 title "%swpused" with lines, datafile using 3:6  axis x1y2 title "kbswpcad" with lines,  datafile using 3:7 axis x1y1 title "%swpcad" with lines'
 
-elif [ $TYPE = "io" ]
+elif [ "$TYPE" = "io" ]
 then
         echo "io transfert";
 		TITLE="set title 'I/O transferts Utilization'"
@@ -116,7 +116,7 @@ then
 		PLOTY2LABEL=" set y2label 'Blocks Utilization'"
 		PLOTSTR='plot datafile using 3:5 axis x1y1  title "tps" with lines, datafile using 3:4  axis x1y1 title "rtps" with lines, datafile using 3:5 axis x1y1 title "wtps" with lines, datafile using 3:6  axis x1y2 title "bread/s" with lines,  datafile using 3:7 axis x1y2 title "bwrtn/s" with lines'
 
-elif [ $TYPE = "q" ]
+elif [ "$TYPE" = "q" ]
 then
         echo "queue";
 		TITLE="set title 'Queue Utilization'"
@@ -126,7 +126,7 @@ then
 		PLOTY2LABEL="set y2label '% Utilization'"
 		PLOTSTR='plot datafile using 3:4 axis x1y1 title "runq-sz" with lines, datafile using 3:5 axis x1y1 title "plist-sz" with lines, datafile using 3:6 axis x1y2 title "ldavg-1m%" with lines, datafile using 3:7 axis x1y2 title "ldavg-5m%" with lines, datafile using 3:8 axis x1y2 title "ldavg-15m%" with lines'
 
-elif [ $TYPE = "ram" ]
+elif [ "$TYPE" = "ram" ]
 then
         echo "ram";
 		TITLE="set title 'RAM Utilization'"
@@ -136,7 +136,7 @@ then
 		PLOTY2LABEL="set y2label '% Utilization'"
 		PLOTSTR='plot  datafile using 3:4  axis x1y1 title "kbfree" with lines, datafile using 3:5 axis x1y1 title "kbused" with lines,   datafile using 3:7 axis x1y1 title "kbbuff" with lines,  datafile using 3:8 axis x1y1 title "kbcached" with lines, datafile using 3:9 axis x1y1 title "kbcommit" with lines'
 
-elif [ $TYPE = "cpu" ]
+elif [ "$TYPE" = "cpu" ]
 then
         echo "cpu";
 		TITLE="set title 'Processor Utilization'"
@@ -242,4 +242,5 @@ echo "$COLOR"
   	gnuplot sadf.plot 2>&1 | grep -v "Warning: empty"
   fi
   rm sadf.plot
+  rm stats.dat
 fi
